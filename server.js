@@ -3,6 +3,7 @@ const fs = require('fs')
 const url = require('url');
 const querystring = require('querystring');
 const figlet = require('figlet')
+const photos = require('./photo.json')
 
 const server = http.createServer((req, res) => {
   const page = url.parse(req.url).pathname;
@@ -30,17 +31,19 @@ const server = http.createServer((req, res) => {
     });
   }
   else if (page == '/api') {
-    if('student' in params){
-      if(params['student']== 'leon'){
+    
+    if('photo' in params){
+      if(params['photo']== '1'){
+        
         res.writeHead(200, {'Content-Type': 'application/json'});
         const objToJson = {
-          name: "leon",
-          status: "Boss Man",
-          currentOccupation: "Baller"
-        }
+          "url": "https://github.com/bobziroll/scrimba-react-bootcamp-images/blob/master/pic1.jpg?raw=true",
+          "id": "1",
+          "isFavorite": false
+      }
         res.end(JSON.stringify(objToJson));
       }//student = leon
-      else if(params['student'] != 'leon'){
+      else if(params['photo'] != 'leon'){
         res.writeHead(200, {'Content-Type': 'application/json'});
         const objToJson = {
           name: "unknown",
