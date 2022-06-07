@@ -3,9 +3,10 @@ const fs = require('fs')
 const url = require('url');
 const querystring = require('querystring');
 const figlet = require('figlet')
-const photos = require('./photo.json')
-
+const photos = require('./photo.json');
 const server = http.createServer((req, res) => {
+  // const photos = JSON.parse(photosJson);
+  console.log(photos)
   const page = url.parse(req.url).pathname;
   const params = querystring.parse(url.parse(req.url).query);
   console.log(page);
@@ -33,25 +34,15 @@ const server = http.createServer((req, res) => {
   else if (page == '/api') {
     
     if('photo' in params){
-      if(params['photo']== '1'){
+      // if(params['photo']== '1')
+      const photo =photos.filter( photo=>photo.id==params['photo'])
+      
         
         res.writeHead(200, {'Content-Type': 'application/json'});
-        const objToJson = {
-          "url": "https://github.com/bobziroll/scrimba-react-bootcamp-images/blob/master/pic1.jpg?raw=true",
-          "id": "1",
-          "isFavorite": false
-      }
-        res.end(JSON.stringify(objToJson));
-      }//student = leon
-      else if(params['photo'] != 'leon'){
-        res.writeHead(200, {'Content-Type': 'application/json'});
-        const objToJson = {
-          name: "unknown",
-          status: "unknown",
-          currentOccupation: "unknown"
-        }
-        res.end(JSON.stringify(objToJson));
-      }//student != leon
+        
+        res.end(JSON.stringify(photo));
+      //student = leon
+
     }//student if
   }//else if
   else if (page == '/css/style.css'){

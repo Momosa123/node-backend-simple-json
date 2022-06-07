@@ -6,7 +6,7 @@ async function makeReq(){
   const res = await fetch(`/api?photo=${photoNumber}`)
   const data = await res.json()
 
-  // console.log(data);
-  document.querySelector("#photo").src = data.url
+  console.log(data);
+  document.querySelector("#photo").src = data[0].url
 
 }
