@@ -6,7 +6,7 @@ const figlet = require('figlet')
 const photos = require('./photo.json');
 const server = http.createServer((req, res) => {
   // const photos = JSON.parse(photosJson);
-  console.log(photos)
+
   const page = url.parse(req.url).pathname;
   const params = querystring.parse(url.parse(req.url).query);
   console.log(page);
@@ -41,6 +41,13 @@ const server = http.createServer((req, res) => {
         res.writeHead(200, {'Content-Type': 'application/json'});
         
         res.end(JSON.stringify(photo));
+      //student = leon
+
+    }else if('photos' in params){
+   
+        res.writeHead(200, {'Content-Type': 'application/json'});
+        
+        res.end(JSON.stringify(photos));
       //student = leon
 
     }//student if
